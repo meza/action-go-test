@@ -1,0 +1,15 @@
+name: 'Common golang tests'
+
+runs:
+  using: "composite"
+  steps:
+    - name: 🔍 Test with the Go CLI
+      shell: bash
+      run: |
+        go install github.com/ctrf-io/go-ctrf-json-reporter/cmd/go-ctrf-json-reporter@latest
+        go test -json ./... | go-ctrf-json-reporter -output ctrf-report.json
+
+    - name: 📝 Publish CTRF Test Summary Results
+      shell: bash
+      run: npx github-actions-ctrf ctrf-report.json
+      if: always()

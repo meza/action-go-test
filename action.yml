@@ -1,4 +1,5 @@
 name: 'Common golang tests'
+description: "Runs Go tests and publishes a CTRF test summary"
 
 runs:
   using: "composite"
